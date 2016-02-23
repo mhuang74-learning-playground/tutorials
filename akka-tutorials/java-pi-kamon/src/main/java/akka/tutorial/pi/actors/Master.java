@@ -1,12 +1,12 @@
-package v.a.akka.tutorial.pi.actors;
+package akka.tutorial.pi.actors;
 
 import java.util.concurrent.TimeUnit;
 
 import scala.concurrent.duration.Duration;
-import v.a.akka.tutorial.pi.messages.Calculate;
-import v.a.akka.tutorial.pi.messages.PiApproximation;
-import v.a.akka.tutorial.pi.messages.Result;
-import v.a.akka.tutorial.pi.messages.Work;
+import akka.tutorial.pi.messages.Calculate;
+import akka.tutorial.pi.messages.PiApproximation;
+import akka.tutorial.pi.messages.Result;
+import akka.tutorial.pi.messages.Work;
 import akka.actor.ActorRef;
 import akka.actor.Props;
 import akka.actor.UntypedActor;

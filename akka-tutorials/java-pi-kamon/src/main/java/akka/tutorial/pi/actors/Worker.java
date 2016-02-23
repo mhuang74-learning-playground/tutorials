@@ -1,7 +1,7 @@
-package v.a.akka.tutorial.pi.actors;
+package akka.tutorial.pi.actors;
 
-import v.a.akka.tutorial.pi.messages.Result;
-import v.a.akka.tutorial.pi.messages.Work;
+import akka.tutorial.pi.messages.Result;
+import akka.tutorial.pi.messages.Work;
 import akka.actor.UntypedActor;
 
 import java.util.Random;

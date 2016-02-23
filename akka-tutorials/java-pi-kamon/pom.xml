@@ -88,7 +88,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <mainClass>v.a.akka.tutorial.pi.Pi</mainClass>
+                    <mainClass>akka.tutorial.pi.Pi</mainClass>
                     <commandlineArgs>
                         -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
                     </commandlineArgs>

@@ -1,6 +1,6 @@
-package v.a.akka.tutorial.pi.actors;
+package akka.tutorial.pi.actors;
 
-import v.a.akka.tutorial.pi.messages.PiApproximation;
+import akka.tutorial.pi.messages.PiApproximation;
 import akka.actor.UntypedActor;
 
 public class Listener extends UntypedActor {

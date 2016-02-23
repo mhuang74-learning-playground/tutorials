@@ -1,8 +1,8 @@
-package v.a.akka.tutorial.pi;
+package akka.tutorial.pi;
 
-import v.a.akka.tutorial.pi.actors.Listener;
-import v.a.akka.tutorial.pi.actors.Master;
-import v.a.akka.tutorial.pi.messages.Calculate;
+import akka.tutorial.pi.actors.Listener;
+import akka.tutorial.pi.actors.Master;
+import akka.tutorial.pi.messages.Calculate;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;

@@ -1,4 +1,4 @@
-package v.a.akka.tutorial.pi.messages;
+package akka.tutorial.pi.messages;
 
 public final class Calculate {
 }
