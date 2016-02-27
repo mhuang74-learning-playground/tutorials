@@ -18,7 +18,7 @@ public class Pi {
         } catch(Exception e) { }
 
         Pi pi = new Pi();
-        pi.calculate(10, 1000000, 1000000);
+        pi.calculate(10, 90000000, 10);
 
         // This application wont terminate unless you shutdown Kamon.
         Kamon.shutdown();
@@ -35,6 +35,9 @@ public class Pi {
 
         // create the master
         ActorRef master = system.actorOf(Props.create(new MasterActorCreator(nrOfWorkers, nrOfMessages, nrOfElements, listener)), "master");
+
+
+        System.out.println("Calculating pi with: workers=" + nrOfWorkers + ", messages=" + nrOfMessages + ", elements=" + nrOfElements);
 
         // start the calculation
         master.tell(new Calculate(), null);

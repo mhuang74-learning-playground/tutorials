@@ -14,9 +14,9 @@ public class Worker extends UntypedActor {
           acc += 4.0 * (1 - (i % 2) * 2) / (2 * i + 1);
         }
 
-        try {
-            Thread.sleep(new Random().nextInt(100));
-        } catch(Exception e) { }
+//        try {
+//            Thread.sleep(new Random().nextInt(100));
+//        } catch(Exception e) { }
 
         return acc;
       }
