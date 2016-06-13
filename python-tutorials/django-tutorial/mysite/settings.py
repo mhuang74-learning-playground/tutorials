@@ -23,7 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '@103$ze!v5f4*^mp0l*$xz_#d&ecoio@nb*d7**6(ed3r7f18m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+if os.environ.get('DEBUG') is not None:
+	DEBUG = os.environ.get('DEBUG') == 'True'
 
 # TODO: Change below to IP of deployed server
 ALLOWED_HOSTS = ['188.166.219.104']
