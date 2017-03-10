@@ -7,26 +7,29 @@ from pyspark import SparkContext, SparkConf
 print ">>>>>>> python version: " + str(sys.version)
 print ">>>>>>> python version info: " + str(sys.version_info)
 
-def nltk_parse(line):
+def nltk_parse_meaningful_words(line):
 	import nltk
-	tokens = nltk.word_tokenize(line)
-	pos = nltk.pos_tag(tokens)
-	return pos
 
-# filter out stopwords and non-words
-def nltk_is_meaningful_word(pos):
+	# tokenize line
+	tokens = nltk.word_tokenize(line)
+	# get part-of-speech metadata
+	all_pos = nltk.pos_tag(tokens)
+
 	import re
 	from nltk.corpus import stopwords
 
-	ret = False
-	pos_word = pos[0]
-	pos_type = pos[1]
+	ret = []
 
-	# check if pos represents a valid alphanumeric Word that is not a Stop Word
-	if (pos_word not in stopwords.words('english') and \
-		re.search("^[0-9a-zA-Z]+$", pos_word) is not None):
-		# found a meaninful word
-		ret = True
+	# filter out stopwords and non-words
+	for pos in all_pos:
+		pos_word = pos[0]
+		pos_type = pos[1]
+
+		# check if pos represents a valid alphanumeric Word that is not a Stop Word
+		if (pos_word not in stopwords.words('english') and \
+			re.search("^[0-9a-zA-Z]+$", pos_word) is not None):
+			# found a meaninful word
+			ret.append(pos)
 
 	return ret
 
@@ -54,8 +57,7 @@ def main(argv):
 	#  - each line is broken up by nltk_parse to collection of tokens. hence use flatMap
 	#  - than remove meaningless and malformed words
 	#  - result is RDD of Tuples2 (word, part-of-speech)
-	meaningful_words_pos = sc.textFile(filename).flatMap(lambda line: nltk_parse(line)) \
-						     .filter(lambda pos: nltk_is_meaningful_word(pos))
+	meaningful_words_pos = sc.textFile(filename).flatMap(lambda line: nltk_parse_meaningful_words(line))
 	meaningful_words_pos.cache()
 
 	# get count of only Nouns
