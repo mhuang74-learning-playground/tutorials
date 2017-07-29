@@ -22,7 +22,6 @@ def main(argv):
 	tokenized = sc.textFile(filename).flatMap(lambda line: line.split(" "))
 
 	wordCounts = tokenized.map(lambda word: (word,1)).reduceByKey(lambda v1,v2: v1+v2)
-	wordCounts.cache()
 
 	filtered = wordCounts.filter(lambda t:t[1] >= int(threshold) and t[0].lower() not in FILTERED_WORDS)
 	filtered.cache()
