@@ -1,0 +1,22 @@
+<workflow-app xmlns='uri:oozie:workflow:0.4' name='SparkSimpleApp'>
+    <start to='spark-node'/>
+    <action name='spark-node'>
+        <spark xmlns="uri:oozie:spark-action:0.1">
+            <job-tracker>${wf:conf("yarn.resource.manager.host")}</job-tracker>
+            <name-node>hdfs://${nameNode}</name-node>
+            <master>${master}</master>
+	    <mode>${mode}</mode>
+            <name>Spark on Oozie - Simple App</name>
+	    <class>SimpleApp</class>
+	    <jar>hdfs://${nameNode}/user/${wf:user()}/oozie-spark/simpleapp/lib/SimpleApp-assembly-1.0.jar</jar>
+        </spark>
+        <ok to="end"/>
+        <error to="fail"/>
+    </action>
+    <kill name="fail">
+        <message>Workflow failed, error
+            message[${wf:errorMessage(wf:lastErrorNode())}]
+        </message>
+    </kill>
+    <end name='end'/>
+</workflow-app>
