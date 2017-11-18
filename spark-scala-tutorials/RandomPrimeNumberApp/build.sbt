@@ -1,4 +1,4 @@
-name := "RandomPrimeNumber"
+name := "RandomPrimeNumberApp"
 
 version := "1.0"
 
