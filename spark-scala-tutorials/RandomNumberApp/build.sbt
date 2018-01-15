@@ -1,9 +1,9 @@
 name := "SimpleRandomNumberApp"
 version := "1.0"
-scalaVersion := "2.11.11"
+scalaVersion := "2.11.8"
 
 libraryDependencies ++= {
-  val sparkVer = "2.1.1"
+  val sparkVer = "2.2.0"
   val log4jVer = "2.8.2"
   Seq(
     "org.apache.spark" %% "spark-core" % sparkVer % "provided" withSources(),
