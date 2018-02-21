@@ -120,7 +120,7 @@ object SimpleRandomPrimeNumberApp {
         case _ => None
       }
       trial
-    })
+    }).repartition(partitions)
 
     dumpPartitions("(brute force) primeNumbers2Rdd", primeNumbers2Rdd)
 
