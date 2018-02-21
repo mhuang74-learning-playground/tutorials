@@ -175,18 +175,20 @@ object SimpleRandomPrimeNumberApp {
   def dumpPartitions(rddName: String, rdd: RDD[Int]) = {
 
     if (this.debug) {
-      LogHolder.log.debug(rddName + " - size:" + rdd.count() + ", partitions:" + rdd.partitions.size)
-
       // make sure rdd is cached after count() action!
       rdd.cache()
 
-      rdd.mapPartitionsWithIndex {
+      LogHolder.log.debug(rddName + " - size:" + rdd.count() + ", partitions:" + rdd.partitions.size)
+
+      val tempRdd = rdd.mapPartitionsWithIndex {
         (index, iterator) => {
           val iteratorList = iterator.toList
           LogHolder.log.debug(rddName + "[part-" + index + "] - size:" + iteratorList.size + ", samples:" + iteratorList.take(5))
           iterator
         }
-      }.take(1)
+      }
+
+      tempRdd.count()
 
     } else {
       LogHolder.log.info(rddName + " - partitions:" + rdd.partitions.size)
