@@ -21,5 +21,5 @@ spark-submit --verbose --class SimpleRandomPrimeNumberApp \
     target/scala-2.11/RandomPrimeNumberApp-assembly-1.0.jar \
     1000000 \
     45 \
-    debug
+    nodebug
 

@@ -77,7 +77,7 @@ object SimpleRandomPrimeNumberApp {
 
     // generate composite numbers up to N using Sieve of Eratosthenes
     // https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
-    val compositeNumbersRdd = sc.parallelize(2 to n, partitions).map(x => (x, (2 to (n / x)))).flatMap(kv => kv._2.map(_ * kv._1))
+    val compositeNumbersRdd = sc.parallelize(2 to n, partitions).map(x => (x, (2 to (n / x)))).flatMap(kv => kv._2.map(_ * kv._1)).repartition(partitions)
     dumpPartitions("compositeNumbersRdd", compositeNumbersRdd)
 
       // NOTE: adding sortBy and distinct takes 3X time due to memory spills..
