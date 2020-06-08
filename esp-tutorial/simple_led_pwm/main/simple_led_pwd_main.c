@@ -93,8 +93,6 @@ void app_main(void)
         ledc_channel_config(&ledc_channel[ch]);
     }
 
-    // Initialize fade service.
-    ledc_fade_func_install(0);
 
     int duty = 0;
 
@@ -109,10 +107,10 @@ void app_main(void)
                 ledc_update_duty(ledc_channel[ch].speed_mode, ledc_channel[ch].channel);
             }
 
-            vTaskDelay(20 / portTICK_PERIOD_MS);
+            vTaskDelay(10 / portTICK_PERIOD_MS);
         }
 
-        vTaskDelay(200 / portTICK_PERIOD_MS);
+        vTaskDelay(100 / portTICK_PERIOD_MS);
 
         for (duty = LEDC_TEST_DUTY; duty > 0; duty--) {
             printf("LED DOWN: set duty = %d\n", duty);
@@ -122,7 +120,7 @@ void app_main(void)
                 ledc_update_duty(ledc_channel[ch].speed_mode, ledc_channel[ch].channel);
             }
 
-            vTaskDelay(20 / portTICK_PERIOD_MS);
+            vTaskDelay(10 / portTICK_PERIOD_MS);
         }
 
     }
