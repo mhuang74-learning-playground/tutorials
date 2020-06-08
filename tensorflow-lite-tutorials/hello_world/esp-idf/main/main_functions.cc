@@ -39,7 +39,9 @@ int inference_count = 0;
 const int kModelArenaSize = 2352;
 // Extra headroom for model + alignment + future interpreter changes.
 const int kExtraArenaSize = 560 + 16 + 100;
-const int kTensorArenaSize = kModelArenaSize + kExtraArenaSize;
+const int kPaddingFor16BytesMemoryAlignment = 12;
+// const int kTensorArenaSize = kModelArenaSize + kExtraArenaSize + kPaddingFor16BytesMemoryAlignment;
+const int kTensorArenaSize = 4 * 1024;
 uint8_t tensor_arena[kTensorArenaSize];
 }  // namespace
 
@@ -53,7 +55,7 @@ void setup() {
 
   // Map the model into a usable data structure. This doesn't involve any
   // copying or parsing, it's a very lightweight operation.
-  model = tflite::GetModel(g_model);
+  model = tflite::GetModel(sinh_model);
   if (model->version() != TFLITE_SCHEMA_VERSION) {
     TF_LITE_REPORT_ERROR(error_reporter,
                          "Model provided is schema version %d not equal "
