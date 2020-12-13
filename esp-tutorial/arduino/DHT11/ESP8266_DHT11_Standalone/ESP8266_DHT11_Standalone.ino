@@ -50,7 +50,7 @@
 #define AUTH_STA3 "CMg96HTDs7uTqv3LD6lmTSndMsIDCWgn"
 #define AUTH_STA4 "L155ijUo03vRHYH1oasS3i-LYe0hCmcP"
 
-char auth[] = AUTH_STA2;
+char auth[] = AUTH_STA1;
 
 // Use IOT Wifi Guest SSID on Asus
 
@@ -58,6 +58,7 @@ char ssid[] = "Oaks-IOT";
 char pass[] = "acornnetwork";
 
 #define DHTPIN 2          // ESP01S-DHT11 shield uses GPIO2 for sensor data
+#define ONBOARD_LED  3
 
 // Uncomment whatever type you're using!
 #define DHTTYPE DHT11     // DHT 11
@@ -92,6 +93,8 @@ void setup()
   // Debug console
   Serial.begin(9600);
 
+  pinMode(ONBOARD_LED,OUTPUT);
+
   Blynk.begin(auth, ssid, pass);
   // You can also specify server:
   //Blynk.begin(auth, ssid, pass, "blynk-cloud.com", 80);
@@ -107,4 +110,9 @@ void loop()
 {
   Blynk.run();
   timer.run();
+
+  delay(1000);
+  digitalWrite(ONBOARD_LED,HIGH);
+  delay(100);
+  digitalWrite(ONBOARD_LED,LOW);
 }
