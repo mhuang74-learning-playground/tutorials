@@ -4,7 +4,7 @@ use predicates::prelude::*;
 
 
 #[test]
-fn file_doesnt_exit() -> Result<(), Box<std::error::Error>> {
+fn file_doesnt_exit() -> Result<(), Box<dyn std::error::Error>> {
     let mut cmd = Command::cargo_bin("grrs")?;
     cmd.arg("foobar")
         .arg("test/file/doest/exist");
@@ -16,10 +16,10 @@ fn file_doesnt_exit() -> Result<(), Box<std::error::Error>> {
 }
 
 use tempfile::NamedTempFile;
-use std::io::{self, Write};
+use std::io::{Write};
 
 #[test]
-fn find_content_in_file() -> Result<(), Box<std::error::Error>> {
+fn find_content_in_file() -> Result<(), Box<dyn std::error::Error>> {
     let mut file = NamedTempFile::new()?;
     writeln!(file, "A test\nActual content\nMore content\nAnother test")?;
 
