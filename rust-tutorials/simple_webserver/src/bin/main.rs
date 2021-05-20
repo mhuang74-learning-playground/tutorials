@@ -4,6 +4,7 @@ use std::net::TcpStream;
 use std::fs;
 use std::thread;
 use std::time::Duration;
+use simple_webserver::ThreadPool;
 
 fn main() {
 	const SERVER_ADDRESS : &str = "127.0.0.1:7878";
@@ -12,10 +13,12 @@ fn main() {
 
 	let listener = TcpListener::bind(SERVER_ADDRESS).unwrap();
 
+	let pool = ThreadPool::new(4);
+
 	for stream in listener.incoming() {
 		let stream = stream.unwrap();
 
-		thread::spawn(|| {
+		pool.execute(|| {
 			handle_connection(stream);
 		});
 	}
