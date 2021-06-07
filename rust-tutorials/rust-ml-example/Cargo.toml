@@ -1,0 +1,15 @@
+[package]
+name = "rust-ml-example"
+version = "0.1.0"
+authors = ["Michael S. Huang <mhuang74@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+linfa = { version = "~0.4.0", features = ["intel-mkl-system"] }
+linfa-logistic = "~0.4.0"
+ndarray = { version = "~0.14.0", default-features = false }
+ndarray-csv = "~0.5.0"
+csv = "~1.1.0"
+plotlib = "~0.5.1"
