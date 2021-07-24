@@ -2,7 +2,22 @@
  
 void setup() {
   pinMode(ONBOARD_LED,OUTPUT);
-  Serial.begin(9600);
+  Serial.begin(115200);
+
+  char msg[64];
+  sprintf(msg, "Total heap: %d", ESP.getHeapSize());
+  Serial.println(msg);
+
+  sprintf(msg, "Free heap: %d", ESP.getFreeHeap());
+  Serial.println(msg);
+
+  sprintf(msg, "Total PSRAM: %d", ESP.getPsramSize());
+  Serial.println(msg);  
+
+  sprintf(msg, "Free PSRAM: %d", ESP.getFreePsram());
+  Serial.println(msg);
+    
+
 }
 
 int count=0;
