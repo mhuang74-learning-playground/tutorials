@@ -4,6 +4,19 @@ void setup() {
   pinMode(ONBOARD_LED,OUTPUT);
   Serial.begin(115200);
 
+   
+
+}
+
+int count=0;
+   
+void loop() {
+  count = count+1;
+  char hello[25];
+  sprintf(hello, "Hello There! Count: %4d", count);
+  Serial.println(hello);
+
+  // print heap info
   char msg[64];
   sprintf(msg, "Total heap: %d", ESP.getHeapSize());
   Serial.println(msg);
@@ -16,17 +29,7 @@ void setup() {
 
   sprintf(msg, "Free PSRAM: %d", ESP.getFreePsram());
   Serial.println(msg);
-    
-
-}
-
-int count=0;
-   
-void loop() {
-  count = count+1;
-  char msg[25];
-  sprintf(msg, "Hello There! Count: %4d", count);
-  Serial.println(msg);
+  
   
   delay(1000);
   digitalWrite(ONBOARD_LED,HIGH);
