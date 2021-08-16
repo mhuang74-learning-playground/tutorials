@@ -8,7 +8,9 @@
 
 #include <Arduino.h>
 
-#define LED_BUILTIN 2
+#ifndef LED_BUILTIN
+  #define LED_BUILTIN 2
+#endif
 
 void setup() {
   // initialize LED digital pin as output
@@ -16,6 +18,11 @@ void setup() {
 
   Serial.begin(115200);
 
+  // print memory info to debug
+  log_d("Total heap: %d", ESP.getHeapSize());
+  log_d("Free heap: %d", ESP.getFreeHeap());
+  log_d("Total PSRAM: %d", ESP.getPsramSize());
+  log_d("Free PSRAM: %d", ESP.getFreePsram());
 }
 
 int count=0;
