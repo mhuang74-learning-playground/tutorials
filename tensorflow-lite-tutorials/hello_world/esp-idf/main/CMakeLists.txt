@@ -4,5 +4,5 @@
 #
 
 idf_component_register(
-    SRCS esp/main.cc main_functions.cc model.cc esp/output_handler.cc constants.cc
+    SRCS esp/main.cc main_functions.cc model.cc output_handler.cc constants.cc
     INCLUDE_DIRS "")
