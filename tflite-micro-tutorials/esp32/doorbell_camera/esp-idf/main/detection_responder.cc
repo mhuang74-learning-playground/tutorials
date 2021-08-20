@@ -53,7 +53,7 @@ void RespondToDetection(tflite::ErrorReporter* error_reporter,
       if (ret != true) {
         TF_LITE_REPORT_ERROR(error_reporter,"jpeg compression failed");
       }
-      ESP_LOGI(TAG, "About to send email. Need 100k for SSL data encription. Free heap: %d\n", heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
+      ESP_LOGI(TAG, "About to send email. Free INTERNAL heap: %d\n", heap_caps_get_free_size(MALLOC_CAP_INTERNAL));
       esp_err_t esp_ret = smtp_client_send_email(jpeg_image, jpeg_img_size);
       if (esp_ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to send the email, returned %02X", esp_ret);
