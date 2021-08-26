@@ -18,13 +18,18 @@ limitations under the License.
 
 #include "smtp_client.h"
 #include "esp_timer.h"
-#include "esp_camera.h"
+// #include "esp_camera.h"
 #include "esp_log.h"
 #include "img_converters.h"
 
 #include "esp_system.h"
 #include "esp_heap_caps.h"
+#include "driver/gpio.h"
 
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+#define GPIO_OUTPUT_FLASHLED  (gpio_num_t)4
 
 /* min time (in ms) between two consecuting email notifications */
 #define HOLD_TIME 5000
@@ -35,6 +40,14 @@ size_t jpeg_img_size = 0;
 camera_fb_t* camera_fb;
 
 static const char *TAG = "tf_responder";
+
+void blinkFlashLED(uint8_t count) {
+  for(int i=0; i<count; i++){
+    gpio_set_level(GPIO_OUTPUT_FLASHLED, 1);
+    vTaskDelay(200/portTICK_PERIOD_MS);
+    gpio_set_level(GPIO_OUTPUT_FLASHLED, 0);
+  }
+}
 
 void RespondToDetection(tflite::ErrorReporter* error_reporter,
                         uint8_t person_score, uint8_t no_person_score) {
@@ -48,6 +61,12 @@ void RespondToDetection(tflite::ErrorReporter* error_reporter,
 
       camera_fb = (camera_fb_t*)image_provider_get_camera_fb();
       TF_LITE_REPORT_ERROR(error_reporter, "person detected");
+
+
+      ESP_LOGI(TAG, "Person detected!");
+      // blink Flash LED once to indicate detection
+      blinkFlashLED(1);
+
       free(jpeg_image);
       bool ret = frame2jpg(camera_fb, 80,  &jpeg_image, &jpeg_img_size);
       if (ret != true) {
@@ -58,6 +77,9 @@ void RespondToDetection(tflite::ErrorReporter* error_reporter,
       if (esp_ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to send the email, returned %02X", esp_ret);
       }
+      // blink Flash LED twice to indicate email sent
+      blinkFlashLED(2);
+
       elapsed_time = 0;
     }
   }
