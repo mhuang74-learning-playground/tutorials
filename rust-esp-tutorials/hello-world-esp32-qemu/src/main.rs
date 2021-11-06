@@ -1,10 +1,11 @@
 #[allow(unused_imports)]
 use esp_idf_sys; // If using the `binstart` feature of `esp-idf-sys`, always keep this module imported
 
-const KILOBYTE: usize = 1024;
+
 
 fn test_memory_allocation() -> () {
-
+    const KILOBYTE: usize = 1024;
+    
     unsafe { esp_idf_sys::heap_caps_print_heap_info(esp_idf_sys::MALLOC_CAP_8BIT); }
 
     for i in (1..4000).step_by(32) {
