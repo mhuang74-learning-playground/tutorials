@@ -4,7 +4,7 @@
 ESP_QEMU_PATH=$HOME/Projects/3rd-party/espressif/qemu/build
 BUILD=debug
 # use same esp-idf env as esp-idf-sys library
-ESPTOOL_CMD="python3 $HOME/.espressif/esp-idf-release/v4.4/components/esptool_py/esptool/esptool.py"
+ESPTOOL_CMD="python3 $HOME/.espressif/esp-idf-v4.3/components/esptool_py/esptool/esptool.py"
 
 TARGET=xtensa-esp32-espidf # Don't change this. Only the ESP32 chip is supported in QEMU for now
 
