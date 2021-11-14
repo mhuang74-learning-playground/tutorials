@@ -113,16 +113,16 @@ fn render(pixels: &mut [u8],
 
 }
 
-use image::{ColorType, png::PngEncoder};
+use image::{ColorType, bmp::BmpEncoder};
 
 /// Write the buffer `pixels` to image, whose dimensions are given by `bounds`, to the file named `filename`
 fn write_image(pixels: &[u8], bounds: (usize,usize), filename: &str) -> Result<(), std::io::Error> {
 
-    let output = File::create(filename)?;
+    let mut output = File::create(filename)?;
 
-    let encoder = PngEncoder::new(output);
+    let mut encoder = BmpEncoder::new(&mut output);
 
-    encoder.encode(&pixels, bounds.0 as u32, bounds.1 as u32, ColorType::L8).expect("Unable to encode PNG");
+    encoder.encode(&pixels, bounds.0 as u32, bounds.1 as u32, ColorType::L8).expect("Unable to encode BMP");
 
     Ok(())
 }
@@ -132,6 +132,8 @@ use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    println!("args len:{}\targs={:?}", args.len(), args);
 
     if args.len() != 5 {
         eprintln!("Usage: {} FILE PIXELS UPPERLEFT LOWERRIGHT", args[0]);

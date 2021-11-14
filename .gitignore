@@ -10,3 +10,7 @@ logs
 .DS_Store
 node_modules
 build
+*.bmp
+*.png
+*.jpg
+
