@@ -11,7 +11,12 @@
             "gdbpath": "rust-gdb",
             "request": "launch",
             "target": "./target/debug/mandelbrot",
-            "cwd": "${workspaceFolder}"
+            "cwd": "${workspaceFolder}",
+            "valuesFormatting": "parseText",
+            "autorun": [
+                "set substitute-path /home/georgik/projects/rust /home/mhuang/.rustup/toolchains/esp/lib/rustlib/src/rust"
+            ]
         }
     ]
 }
+
